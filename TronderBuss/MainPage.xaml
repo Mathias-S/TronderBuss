@@ -59,5 +59,8 @@
                 </ListBox>
             </controls:PanoramaItem>
         </controls:Panorama>
+        <Border Background="Black" BorderBrush="Black" Width="400" Height="300">
+            <Image Source="Images/ajax-loader.gif" />
+        </Border>
     </Grid>
 </phone:PhoneApplicationPage>
