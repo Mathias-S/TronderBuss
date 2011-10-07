@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using Microsoft.Phone.Controls;
 using System.Windows.Controls;
+using System;
+using TronderBuss.ViewModels;
 
 namespace TronderBuss
 {
@@ -25,7 +27,14 @@ namespace TronderBuss
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ((ListBox)sender).SelectedIndex = -1;
+            if (e.AddedItems.Count == 1)
+            {
+                var stop = e.AddedItems[0] as StopViewModel;
+                if (stop != null)
+                {
+                    NavigationService.Navigate(new Uri("/StopPage.xaml?stop=" + stop.BusStopId, UriKind.Relative));
+                }
+            }
         }
     }
 }

@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BussBuddy.cs" />
+    <Compile Include="ViewModels\DeparturesResponse.cs" />
     <Compile Include="ViewModels\DepartureViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

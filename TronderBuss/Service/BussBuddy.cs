@@ -26,5 +26,17 @@ namespace TronderBuss.Service
                 callback(result.Data.BusStops.OrderBy(stop => stop.Name).GroupBy(stop => stop.Name).Select(group => group.First()));
             });
         }
+
+        public void GetDepartures(int busStopId, Action<DepartureViewModel> callback)
+        {
+            var request = new RestRequest("departures/{id}");
+            request.AddUrlSegment("id", busStopId.ToString());
+            request.RequestFormat = DataFormat.Json;
+
+            client.ExecuteAsync<DeparturesResponse>(request, result =>
+            {
+
+            });
+        }
     }
 }
