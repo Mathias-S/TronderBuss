@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual Studio 2010 Express for Windows Phone
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TronderBuss", "TronderBuss\TronderBuss.csproj", "{EBFD301B-9EA2-47A7-8122-04F6EFCDDF54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestSharp.WindowsPhone.Mango", "..\RestSharp\RestSharp.WindowsPhone.Mango\RestSharp.WindowsPhone.Mango.csproj", "{71647E33-714F-4975-8368-71B075045272}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{EBFD301B-9EA2-47A7-8122-04F6EFCDDF54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBFD301B-9EA2-47A7-8122-04F6EFCDDF54}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EBFD301B-9EA2-47A7-8122-04F6EFCDDF54}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{71647E33-714F-4975-8368-71B075045272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71647E33-714F-4975-8368-71B075045272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71647E33-714F-4975-8368-71B075045272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71647E33-714F-4975-8368-71B075045272}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

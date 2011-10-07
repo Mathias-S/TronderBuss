@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Microsoft.Phone.Controls;
+using System.Windows.Controls;
 
 namespace TronderBuss
 {
@@ -20,6 +21,11 @@ namespace TronderBuss
         {
             if (!App.ViewModel.Loaded)
                 App.ViewModel.Load();
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ((ListBox)sender).SelectedIndex = -1;
         }
     }
 }
