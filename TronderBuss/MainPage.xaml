@@ -19,9 +19,10 @@
  
         <!--Panorama control-->
         <controls:Panorama Title="TrønderBuss">
-            <controls:Panorama.Background>
+            
+            <!--<controls:Panorama.Background>
                 <ImageBrush ImageSource="PanoramaBackground.png"/>
-            </controls:Panorama.Background>
+            </controls:Panorama.Background>-->
  
             <!--Panorama item one-->
             <controls:PanoramaItem Header="holdeplasser">

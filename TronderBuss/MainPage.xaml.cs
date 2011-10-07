@@ -25,6 +25,7 @@ namespace TronderBuss
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             ((ListBox)sender).SelectedIndex = -1;
         }
     }

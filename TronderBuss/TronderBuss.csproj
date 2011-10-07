@@ -78,6 +78,7 @@
     <Compile Include="ViewModels\DepartureViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\StopGroupViewModel.cs" />
     <Compile Include="ViewModels\StopResponse.cs" />
     <Compile Include="ViewModels\StopViewModel.cs" />
   </ItemGroup>
