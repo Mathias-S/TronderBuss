@@ -30,5 +30,17 @@ namespace TronderBuss.Service
                 }));
             });
         }
+
+        public void GetDepartures(int busStopId, Action<DepartureViewModel> callback)
+        {
+            var request = new RestRequest("departures/{id}");
+            request.AddUrlSegment("id", busStopId.ToString());
+            request.RequestFormat = DataFormat.Json;
+
+            client.ExecuteAsync<DeparturesResponse>(request, result =>
+            {
+
+            });
+        }
     }
 }
