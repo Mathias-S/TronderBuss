@@ -11,7 +11,7 @@ namespace TronderBuss.Service
 
         public BussBuddy()
         {
-            client = new RestClient();
+            client = new RestClient("http://api.busbuddy.norrs.no:8080/api/1.2/");
             client.AddDefaultParameter("apiKey", "HwSJ6xL9wCUnpegC");
         }
 
