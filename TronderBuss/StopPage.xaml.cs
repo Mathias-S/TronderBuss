@@ -28,17 +28,17 @@ namespace TronderBuss
         {
             base.OnNavigatedTo(e);
 
-            string id = null;
-            if(!NavigationContext.QueryString.TryGetValue("stop", out id))
+            string name = null;
+            if(!NavigationContext.QueryString.TryGetValue("stop", out name))
                 NavigationService.GoBack();
 
-            int iId = 0;
-            if(!int.TryParse(id, out iId))
-                NavigationService.GoBack();
-
-            var stop = App.ViewModel.Stops.Where(s => s.BusStopId == iId).SingleOrDefault();
+            var stop = App.ViewModel.Stops.Where(s => s.Name == name).SingleOrDefault();
             if (stop == null)
                 NavigationService.GoBack();
+
+            DataContext = stop;
+            if (!stop.Loaded)
+                stop.Load();
         }
     }
 }

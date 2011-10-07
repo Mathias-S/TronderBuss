@@ -12,13 +12,13 @@ namespace TronderBuss
     {
         public MainViewModel()
         {
-            this.Stops = new ObservableCollection<StopViewModel>();
+            this.Stops = new ObservableCollection<StopGroupViewModel>();
         }
 
         /// <summary>
         /// A collection for ItemViewModel objects.
         /// </summary>
-        public ObservableCollection<StopViewModel> Stops { get; private set; }
+        public ObservableCollection<StopGroupViewModel> Stops { get; private set; }
 
         private bool loading = false;
         private bool loaded = false;

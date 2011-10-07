@@ -10,6 +10,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Collections.Generic;
+using TronderBuss.Service;
+using System.Collections.ObjectModel;
 
 namespace TronderBuss.ViewModels
 {
@@ -17,6 +19,10 @@ namespace TronderBuss.ViewModels
     {
         private string name;
         private List<int> ids;
+        private bool loaded;
+        private ObservableCollection<DepartureViewModel> towardsCity = new ObservableCollection<DepartureViewModel>();
+        private ObservableCollection<DepartureViewModel> fromCity = new ObservableCollection<DepartureViewModel>();
+
 
         public string Name
         {
@@ -51,5 +57,55 @@ namespace TronderBuss.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public bool Loaded
+        {
+            get { return loaded; }
+            set
+            {
+                if (loaded != value)
+                {
+                    loaded = value;
+                    OnPropertyChange("Loaded");
+                }
+            }
+        }
+
+
+
+        public void Load()
+        {
+            if (loaded)
+                return;
+            loaded = true;
+
+            var bb = new BussBuddy();
+            foreach (var id in ids)
+            {
+                bb.GetDepartures(id, departures =>
+                {
+                    if (departures.IsGoingTowardsCentrum)
+                    {
+                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        {
+                            foreach (var departure in departures.Departures)
+                            {
+                                towardsCity.Add(departure);
+                            }
+                        });
+                    }
+                    else
+                    {
+                        Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        {
+                            foreach (var departure in departures.Departures)
+                            {
+                                fromCity.Add(departure);
+                            }
+                        });
+                    }
+                });
+            }
+        }
     }
 }

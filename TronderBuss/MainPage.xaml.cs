@@ -3,6 +3,8 @@ using Microsoft.Phone.Controls;
 using System.Windows.Controls;
 using System;
 using TronderBuss.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TronderBuss
 {
@@ -29,12 +31,21 @@ namespace TronderBuss
         {
             if (e.AddedItems.Count == 1)
             {
-                var stop = e.AddedItems[0] as StopViewModel;
+                var stop = e.AddedItems[0] as StopGroupViewModel;
                 if (stop != null)
                 {
-                    NavigationService.Navigate(new Uri("/StopPage.xaml?stop=" + stop.BusStopId, UriKind.Relative));
+                    var qs = ToQueryString(new Dictionary<string, string>
+                    {
+                        {"stop", stop.Name}
+                    });
+                    NavigationService.Navigate(new Uri("/StopPage.xaml" + qs, UriKind.Relative));
                 }
             }
+        }
+
+        private string ToQueryString(Dictionary<string,string> nvc)
+        {
+            return "?" + string.Join("&", nvc.Select(obj => obj.Key + "=" + System.Net.HttpUtility.UrlEncode(obj.Value)));
         }
     }
 }
