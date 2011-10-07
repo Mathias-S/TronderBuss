@@ -54,6 +54,10 @@ namespace TronderBuss
 
         internal void Load()
         {
+            if (loaded)
+                return;
+
+            loaded = true;
             BussBuddy bb = new BussBuddy();
             bb.GetBussStops(stops =>
             {

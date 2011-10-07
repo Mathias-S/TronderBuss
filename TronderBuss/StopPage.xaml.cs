@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using Microsoft.Phone.Controls;
+using System.Windows.Navigation;
+using System.Linq;
 
 namespace TronderBuss
 {
@@ -20,6 +22,23 @@ namespace TronderBuss
         {
             if (!App.ViewModel.Loaded)
                 App.ViewModel.Load();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            string id = null;
+            if(!NavigationContext.QueryString.TryGetValue("stop", out id))
+                NavigationService.GoBack();
+
+            int iId = 0;
+            if(!int.TryParse(id, out iId))
+                NavigationService.GoBack();
+
+            var stop = App.ViewModel.Stops.Where(s => s.BusStopId == iId).SingleOrDefault();
+            if (stop == null)
+                NavigationService.GoBack();
         }
     }
 }
