@@ -27,12 +27,11 @@
             <!--Panorama item one-->
             <controls:PanoramaItem Header="first item">
                 <!--Double line list with text wrapping-->
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Stops}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17" Width="432" Height="78">
-                                <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -59,7 +58,7 @@
                 </ListBox>
             </controls:PanoramaItem>
         </controls:Panorama>
-        <Border Background="Black" BorderBrush="Black">
+        <Border Background="Black" BorderBrush="Black" Visibility="Collapsed">
             <ProgressBar />
         </Border>
     </Grid>

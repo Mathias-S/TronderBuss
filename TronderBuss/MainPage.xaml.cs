@@ -18,6 +18,8 @@ namespace TronderBuss
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            if (!App.ViewModel.Loaded)
+                App.ViewModel.Load();
         }
     }
 }

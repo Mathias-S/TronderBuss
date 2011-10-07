@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
+using TronderBuss.Service;
 using TronderBuss.ViewModels;
 
 
@@ -18,11 +20,9 @@ namespace TronderBuss
         /// </summary>
         public ObservableCollection<StopViewModel> Stops { get; private set; }
 
-        private bool loading = true;
-        /// <summary>
-        /// Sample ViewModel property; this property is used in the view to display its value using a Binding
-        /// </summary>
-        /// <returns></returns>
+        private bool loading = false;
+        private bool loaded = false;
+
         public bool Loading
         {
             get
@@ -37,6 +37,32 @@ namespace TronderBuss
                     NotifyPropertyChanged("Loading");
                 }
             }
+        }
+
+        public bool Loaded
+        {
+            get { return loaded; }
+            set
+            {
+                if (value != loaded)
+                {
+                    loaded = value;
+                    NotifyPropertyChanged("Loaded");
+                }
+            }
+        }
+
+        internal void Load()
+        {
+            BussBuddy bb = new BussBuddy();
+            bb.GetBussStops(stops =>
+            {
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    foreach (var stop in stops)
+                        Stops.Add(stop);
+                });
+            });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
