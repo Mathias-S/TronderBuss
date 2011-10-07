@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{f1b49363-ee60-42eb-b1d9-f71a9df0d3f7}" Title="TronderBuss" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="TronderBuss author" Description="Sample description" Publisher="TronderBuss">
+  <App xmlns="" ProductID="{5e9754da-c2ae-486b-8871-b926157b11cd}" Title="TronderBuss" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="TronderBuss author" Description="Sample description" Publisher="TronderBuss">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES"/>

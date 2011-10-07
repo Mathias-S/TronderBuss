@@ -65,7 +65,7 @@ namespace TronderBuss
                 //Application.Current.Host.Settings.EnableRedrawRegions = true;
 
                 // Enable non-production analysis visualization mode, 
-                // which shows areas of a page that are handed off GPU with a colored overlay.
+                // which shows areas of a page that are handed off to GPU with a colored overlay.
                 //Application.Current.Host.Settings.EnableCacheVisualization = true;
 
                 // Disable the application idle detection by setting the UserIdleDetectionMode property of the
