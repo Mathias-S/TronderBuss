@@ -18,47 +18,34 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
  
         <!--Panorama control-->
-        <controls:Panorama Title="TrønderBuss">
-            <controls:Panorama.Background>
-                <ImageBrush ImageSource="PanoramaBackground.png"/>
-            </controls:Panorama.Background>
- 
-            <!--Panorama item one-->
-            <controls:PanoramaItem Header="holdeplasser">
-                <!--Double line list with text wrapping-->
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Stops}">
+        <controls:Pivot Title="{Binding Name}" FontSize="{StaticResource PhoneFontSizeExtraLarge}">
+            <controls:PivotItem Header="Til byen">
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding TowardsCity}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,0,0,17" Width="432" Height="78">
-                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="100" Text="{Binding TimeView}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
+                                <TextBlock Width="40" Text="{Binding Line}" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                                <TextBlock Text="{Binding Destination}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </controls:PanoramaItem>
- 
-            <!--Panorama item two-->
-            <!--Use 'Orientation="Horizontal"' to enable a panel that lays out horizontally-->
-            <controls:PanoramaItem Header="second item">
-                <!--Double line list with image placeholder and text wrapping-->
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+            </controls:PivotItem>
+            
+            <controls:PivotItem Header="Fra byen">
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding FromCity}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,17">
-                                <!--Replace rectangle with image-->
-                                <Rectangle Height="100" Width="100" Fill="#FFE5001b" Margin="12,0,9,0"/>
-                                <StackPanel Width="311">                                    
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="100" Text="{Binding TimeView}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
+                                <TextBlock Width="40" Text="{Binding Line}" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                                <TextBlock Text="{Binding Destination}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </controls:PanoramaItem>
-        </controls:Panorama>
-        <Border Background="Black" BorderBrush="Black" Visibility="Collapsed">
-            <ProgressBar />
-        </Border>
+            </controls:PivotItem>
+        </controls:Pivot>
     </Grid>
 </phone:PhoneApplicationPage>
