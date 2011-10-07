@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace TronderBuss.ViewModels
 {
     public class DeparturesResponse : INotifyPropertyChanged
     {
         private bool isGoingTowardsCentrum;
-        private ObservableCollection<DepartureViewModel> departures;
+        private List<DepartureViewModel> departures;
 
         public bool IsGoingTowardsCentrum
         {
@@ -20,7 +21,7 @@ namespace TronderBuss.ViewModels
                 }
             }
         }
-        public ObservableCollection<DepartureViewModel> Departures
+        public List<DepartureViewModel> Departures
         {
             get { return departures; }
             set

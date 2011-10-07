@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System;
 
 namespace TronderBuss.ViewModels
 {
@@ -58,6 +59,30 @@ namespace TronderBuss.ViewModels
                 }
             }
         }
+
+        public string TimeView
+        {
+            get
+            {
+                if (isRealtimeData)
+                {
+                    DateTime time = ParseTime(registeredDepartureTime);
+                    return String.Format("{0:00} min", Math.Ceiling(time.Subtract(DateTime.Now).TotalMinutes));
+                }
+                else
+                {
+                    return ParseTime(scheduledDepartureTime).ToString("hh:mm");
+                }
+            }
+        }
+
+        private DateTime ParseTime(string timeString)
+        {
+            var dt =  DateTime.Parse(timeString + "Z");
+            dt = DateTime.SpecifyKind(dt, DateTimeKind.Local);
+            return dt.ToUniversalTime();
+        }
+
         public bool IsRealtimeData
         {
             get { return isRealtimeData; }

@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using TronderBuss.Service;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace TronderBuss.ViewModels
 {
@@ -50,6 +51,16 @@ namespace TronderBuss.ViewModels
             }
         }
 
+        public ObservableCollection<DepartureViewModel> TowardsCity
+        {
+            get { return towardsCity; }
+        }
+
+        public ObservableCollection<DepartureViewModel> FromCity
+        {
+            get { return fromCity; }
+        }
+
         private void OnPropertyChange(string propertyName)
         {
             if (PropertyChanged != null)
@@ -84,11 +95,16 @@ namespace TronderBuss.ViewModels
             {
                 bb.GetDepartures(id, departures =>
                 {
+                    if (departures == null)
+                    {
+                        Console.WriteLine("null");
+                        return;
+                    }
                     if (departures.IsGoingTowardsCentrum)
                     {
                         Deployment.Current.Dispatcher.BeginInvoke(() =>
                         {
-                            foreach (var departure in departures.Departures)
+                            foreach (var departure in departures.Departures.OrderBy(d => d.TimeView))
                             {
                                 towardsCity.Add(departure);
                             }
@@ -98,7 +114,7 @@ namespace TronderBuss.ViewModels
                     {
                         Deployment.Current.Dispatcher.BeginInvoke(() =>
                         {
-                            foreach (var departure in departures.Departures)
+                            foreach (var departure in departures.Departures.OrderBy(d => d.TimeView))
                             {
                                 fromCity.Add(departure);
                             }
