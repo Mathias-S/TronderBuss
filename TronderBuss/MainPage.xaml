@@ -62,13 +62,5 @@
         </controls:Panorama>
     </Grid>
 
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Legg til i favoritter"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="Innstillinger"/>
-                <shell:ApplicationBarMenuItem Text="Om TrønderBuss"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+
 </phone:PhoneApplicationPage>
