@@ -62,6 +62,7 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="ShowMap" Click="ShowMap_Click" IconUri="/Images/appbar.mapicon.png" Text="Vis i kart"/>
             <shell:ApplicationBarIconButton x:Name="FavButton" Click="FavButton_Click" IconUri="/Images/appbar.favs.addto.rest.png" Text="Legg til i favoritter"/>
+            <!--<shell:ApplicationBarIconButton x:Name="UnFavButton" Click="FavButton_Click" IconUri="/Images/appbar.favicon.remove.png" Text="Fjern fra favoritter"/>-->
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
