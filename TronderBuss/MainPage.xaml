@@ -52,10 +52,22 @@
                     <TextBlock Text="History" Grid.Row="1" Style="{StaticResource PhoneTextLargeStyle}" x:Name="HistoryLabel" />
                     
                     <ListBox Grid.Row="2" x:Name="HistoryListBox">
-                        
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,3" Width="432" Height="50" Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
-                    <ListBox Grid.Row="2" x:Name="SearchListBox">
-                        
+                    <ListBox Grid.Row="2" x:Name="SearchListBox" SelectionChanged="ListBox_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,3" Width="432" Height="50" Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
             </controls:PanoramaItem>

@@ -25,7 +25,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Width="100" Text="{Binding TimeView}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
-                                <TextBlock Width="40" Text="{Binding Line}" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                                <TextBlock Width="50" Text="{Binding Line}" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeMedium}" />
                                 <TextBlock Text="{Binding Destination}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
                             </StackPanel>
                         </DataTemplate>
@@ -39,7 +39,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Width="100" Text="{Binding TimeView}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
-                                <TextBlock Width="40" Text="{Binding Line}" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeMedium}" />
+                                <TextBlock Width="50" Text="{Binding Line}" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeMedium}" />
                                 <TextBlock Text="{Binding Destination}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
                             </StackPanel>
                         </DataTemplate>
