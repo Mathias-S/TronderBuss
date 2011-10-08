@@ -72,6 +72,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Service\DbContext.cs" />
+    <Compile Include="ShowMap.xaml.cs">
+      <DependentUpon>ShowMap.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StopPage.xaml.cs">
       <DependentUpon>StopPage.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="ShowMap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StopPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -124,6 +131,7 @@
     <Resource Include="PanoramaBackground.png" />
     <Resource Include="Images\addstar.png" />
     <Content Include="Images\appbar.favs.addto.rest.png" />
+    <Resource Include="Images\bus.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>

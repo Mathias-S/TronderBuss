@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Device.Location;
 
 namespace TronderBuss.ViewModels
 {
@@ -54,6 +55,11 @@ namespace TronderBuss.ViewModels
                     NotifyPropertyChanged("Availible");
                 }
             }
+        }
+
+        public GeoCoordinate GeoLocation
+        {
+            get { return new GeoCoordinate(Latitude, Longitude); }
         }
     }
 }

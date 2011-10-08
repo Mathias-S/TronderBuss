@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Device.Location;
+using TronderBuss.Service;
 namespace TronderBuss
 {
     public partial class MainPage : PhoneApplicationPage
@@ -40,6 +41,7 @@ namespace TronderBuss
                     {
                         {"stop", stop.Name}
                     });
+                    BussBuddy.Instance.BumpHistory(stop.Name);
                     NavigationService.Navigate(new Uri("/StopPage.xaml" + qs, UriKind.Relative));
                 }
             }
@@ -57,9 +59,8 @@ namespace TronderBuss
 
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            HistoryListBox.Visibility = System.Windows.Visibility.Collapsed;
             HistoryLabel.Visibility = System.Windows.Visibility.Collapsed;
-            SearchListBox.Visibility = System.Windows.Visibility.Visible;
+            HistoryListBox.ItemsSource = null;
         }
 
         private void SearchTextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
@@ -72,9 +73,8 @@ namespace TronderBuss
         {
             if (String.IsNullOrWhiteSpace(SearchTextBox.Text))
             {
-                HistoryListBox.Visibility = System.Windows.Visibility.Visible;
+                HistoryListBox.ItemsSource = App.ViewModel.History;
                 HistoryLabel.Visibility = System.Windows.Visibility.Visible;
-                SearchListBox.Visibility = System.Windows.Visibility.Collapsed;
             }
         }
 
@@ -97,7 +97,7 @@ namespace TronderBuss
                     if (filterText.ToLower().Split(' ').All(s => item.Name.ToLower().Contains(s)))
                         fin.Add(item);
                 }
-                Dispatcher.BeginInvoke(() => SearchListBox.ItemsSource = fin);
+                Dispatcher.BeginInvoke(() => HistoryListBox.ItemsSource = fin);
             }).Start();
         }
     }

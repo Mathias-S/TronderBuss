@@ -5,6 +5,8 @@ using System.Linq;
 using TronderBuss.Service;
 using TronderBuss.ViewModels;
 using System;
+using Microsoft.Phone.Tasks;
+using System.Collections.Generic;
 
 namespace TronderBuss
 {
@@ -47,7 +49,16 @@ namespace TronderBuss
 
         private void ShowMap_Click(object sender, System.EventArgs e)
         {
-            
+            var qs = ToQueryString(new Dictionary<string, string>
+            {
+                {"stop", model.Name}
+            });
+            NavigationService.Navigate(new Uri("/ShowMap.xaml" + qs, UriKind.Relative));
+        }
+
+        private string ToQueryString(Dictionary<string, string> nvc)
+        {
+            return "?" + string.Join("&", nvc.Select(obj => obj.Key + "=" + System.Net.HttpUtility.UrlEncode(obj.Value)));
         }
 
         private void FavButton_Click(object sender, System.EventArgs e)

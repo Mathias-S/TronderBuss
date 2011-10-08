@@ -126,6 +126,44 @@ namespace TronderBuss.Service
             return context.Favs.Where(f => f.Name == name).ToList().Any();
         }
 
+        public void BumpHistory(string name)
+        {
+            context.History.DeleteAllOnSubmit(context.History.Where(h => h.Name == name));
+            context.History.InsertOnSubmit(new History
+            {
+                Name = name,
+                LastAccess = DateTime.Now
+            });
+            context.History.DeleteAllOnSubmit(context.History.OrderByDescending(h => h.LastAccess).Skip(50));
+            context.SubmitChanges();
+            UpdateHistory();
+        }
+
+        public void UpdateHistory()
+        {
+            var lastHistory = context.History.OrderByDescending(h => h.LastAccess).Take(20).ToList();
+            var hist = from h in lastHistory
+                       let g = context.Stops.Where(c => c.Name == h.Name).ToList()
+                       select new StopGroupViewModel
+                       {
+                           Ids = g.Select(s => s.BusStopId).ToList(),
+                           Name = h.Name,
+                           Locations = g.Select(s => new LocationViewModel
+                           {
+                               Longitude = s.Longitude,
+                               Latitude = s.Latitude,
+                               Availible = true
+                           }).ToList()
+                       };
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                App.ViewModel.History.Clear();
+                foreach (var h in hist)
+                    App.ViewModel.History.Add(h);
+            });
+
+        }
+
         public void GetDepartures(int busStopId, Action<DeparturesResponse> callback)
         {
             var request = new RestRequest("departures/{id}");
@@ -146,6 +184,16 @@ namespace TronderBuss.Service
 
             [Column]
             public int Pos { get; set; }
+        }
+
+        [Table]
+        public class History
+        {
+            [Column(CanBeNull = false, IsDbGenerated = false, IsPrimaryKey = true)]
+            public string Name { get; set; }
+
+            [Column]
+            public DateTime LastAccess { get; set; }
         }
     }
 }

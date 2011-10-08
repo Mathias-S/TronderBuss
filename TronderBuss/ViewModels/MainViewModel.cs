@@ -15,6 +15,7 @@ namespace TronderBuss
         {
             this.Stops = new ObservableCollection<StopGroupViewModel>();
             this.Favs = new ObservableCollection<StopGroupViewModel>();
+            this.History = new ObservableCollection<StopGroupViewModel>();
             this.Location = new LocationViewModel();
         }
 
@@ -23,6 +24,7 @@ namespace TronderBuss
         /// </summary>
         public ObservableCollection<StopGroupViewModel> Stops { get; private set; }
         public ObservableCollection<StopGroupViewModel> Favs { get; private set; }
+        public ObservableCollection<StopGroupViewModel> History { get; private set; }
         public LocationViewModel Location { get; private set; }
 
         private bool loading = false;
@@ -79,6 +81,7 @@ namespace TronderBuss
                 foreach (var stop in stops)
                     Favs.Add(stop);
             });
+            bb.UpdateHistory();
         }
 
         private GeoCoordinateWatcher watcher;
