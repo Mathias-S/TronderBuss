@@ -4,6 +4,7 @@ using RestSharp;
 using TronderBuss.ViewModels;
 using System.Linq;
 using System.Data.Linq.Mapping;
+using System.Windows;
 
 namespace TronderBuss.Service
 {
@@ -76,7 +77,7 @@ namespace TronderBuss.Service
 
         public void GetFavs(Action<IEnumerable<StopGroupViewModel>> callback)
         {
-            var favs = context.Favs.OrderBy(f => f.Pos).ToList().Select(f => context.Stops.Where(s => s.Name == f.Name));
+            var favs = context.Favs.OrderByDescending(f => f.Pos).ToList().Select(f => context.Stops.Where(s => s.Name == f.Name));
             var stops = from f in favs
                         from s in f
                         select s;
@@ -95,17 +96,34 @@ namespace TronderBuss.Service
 
         public void AddAsFav(string name, int pos)
         {
+            if (pos == -1)
+            {
+                pos = context.Favs.Count();
+            }
             context.Favs.InsertOnSubmit(new Fav
             {
                 Name = name,
                 Pos = pos
             });
             context.SubmitChanges();
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                App.ViewModel.Favs.Add(App.ViewModel.Stops.Where(s => s.Name == name).First());
+            });
         }
 
         public void RemoveAsFav(string name)
         {
             context.Favs.DeleteAllOnSubmit(context.Favs.Where(f => f.Name == name));
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                App.ViewModel.Favs.Remove(App.ViewModel.Favs.Where(f => f.Name == name).First());
+            });
+        }
+
+        public bool IsFav(string name)
+        {
+            return context.Favs.Where(f => f.Name == name).ToList().Any();
         }
 
         public void GetDepartures(int busStopId, Action<DeparturesResponse> callback)

@@ -2,11 +2,15 @@
 using Microsoft.Phone.Controls;
 using System.Windows.Navigation;
 using System.Linq;
+using TronderBuss.Service;
+using TronderBuss.ViewModels;
+using System;
 
 namespace TronderBuss
 {
     public partial class StopPage : PhoneApplicationPage
     {
+        StopGroupViewModel model;
         // Constructor
         public StopPage()
         {
@@ -32,7 +36,7 @@ namespace TronderBuss
             if(!NavigationContext.QueryString.TryGetValue("stop", out name))
                 NavigationService.GoBack();
 
-            var stop = App.ViewModel.Stops.Where(s => s.Name == name).SingleOrDefault();
+            var stop = model = App.ViewModel.Stops.Where(s => s.Name == name).SingleOrDefault();
             if (stop == null)
                 NavigationService.GoBack();
 
@@ -44,6 +48,14 @@ namespace TronderBuss
         private void ShowMap_Click(object sender, System.EventArgs e)
         {
             
+        }
+
+        private void FavButton_Click(object sender, System.EventArgs e)
+        {
+            if(BussBuddy.Instance.IsFav(model.Name))
+                BussBuddy.Instance.RemoveAsFav(model.Name);
+            else
+                BussBuddy.Instance.AddAsFav(model.Name, -1);
         }
     }
 }

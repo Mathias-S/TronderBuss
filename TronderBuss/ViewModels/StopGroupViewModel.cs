@@ -39,6 +39,19 @@ namespace TronderBuss.ViewModels
             }
         }
 
+        public bool IsFav
+        {
+            get { return BussBuddy.Instance.IsFav(Name); }
+            set
+            {
+                if (value)
+                    BussBuddy.Instance.AddAsFav(Name, -1);
+                else
+                    BussBuddy.Instance.RemoveAsFav(Name);
+                NotifyPropertyChanged("IsFav");
+            }
+        }
+
         public List<int> Ids
         {
             get { return ids; }
@@ -74,8 +87,6 @@ namespace TronderBuss.ViewModels
         {
             get { return fromCity; }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public bool Loaded
         {

@@ -8,6 +8,7 @@
     xmlns:maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:local="clr-namespace:TronderBuss"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800" 
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -15,7 +16,7 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
+            <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
  
         <!--Panorama control-->
@@ -58,8 +59,8 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton Click="ShowMap_Click" IconUri="/Images/appbar_button1.png" Text="Vis i kart"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.favs.addto.rest.png" Text="Legg til i favoritter"/>
+            <shell:ApplicationBarIconButton x:Name="ShowMap" Click="ShowMap_Click" IconUri="/Images/appbar_button1.png" Text="Vis i kart"/>
+            <shell:ApplicationBarIconButton x:Name="FavButton" Click="FavButton_Click" IconUri="/Images/appbar.favs.addto.rest.png" Text="Legg til i favoritter"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>
