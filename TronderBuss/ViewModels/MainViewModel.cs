@@ -5,7 +5,8 @@ using System.Windows;
 using TronderBuss.Service;
 using TronderBuss.ViewModels;
 using System.Device.Location;
-
+using System.Threading;
+using System.Linq;
 
 namespace TronderBuss
 {
@@ -16,6 +17,7 @@ namespace TronderBuss
             this.Stops = new ObservableCollection<StopGroupViewModel>();
             this.Favs = new ObservableCollection<StopGroupViewModel>();
             this.History = new ObservableCollection<StopGroupViewModel>();
+            this.CloseBy = new ObservableCollection<StopGroupViewModel>();
             this.Location = new LocationViewModel();
         }
 
@@ -25,6 +27,7 @@ namespace TronderBuss
         public ObservableCollection<StopGroupViewModel> Stops { get; private set; }
         public ObservableCollection<StopGroupViewModel> Favs { get; private set; }
         public ObservableCollection<StopGroupViewModel> History { get; private set; }
+        public ObservableCollection<StopGroupViewModel> CloseBy { get; private set; }
         public LocationViewModel Location { get; private set; }
 
         private bool loading = false;
@@ -101,10 +104,31 @@ namespace TronderBuss
                     Location.Latitude = arg.Position.Location.Latitude;
                     Location.Longitude = arg.Position.Location.Longitude;
                 });
+                UpdateCloseBy();
             };
 
             try { watcher.Start(); }
             catch { }
+        }
+
+        private void UpdateCloseBy()
+        {
+            new Thread((ThreadStart)delegate
+            {
+                var closest = (from s in Stops
+                               let lat = s.LatMid
+                               let lon = s.LonMid
+                               let dis = Math.Sqrt(Math.Pow(lat - Location.Latitude, 2) + Math.Pow(lon - Location.Longitude, 2))
+                               orderby dis
+                               select s).Take(10).ToList();
+
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    App.ViewModel.CloseBy.Clear();
+                    foreach (var c in closest)
+                        App.ViewModel.CloseBy.Add(c);
+                });
+            }).Start();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
