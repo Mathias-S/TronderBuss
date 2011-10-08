@@ -22,5 +22,6 @@ namespace TronderBuss.Service
         }
 
         public Table<StopViewModel> Stops;
+        public Table<BussBuddy.Fav> Favs;
     }
 }

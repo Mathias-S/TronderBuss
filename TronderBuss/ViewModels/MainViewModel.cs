@@ -14,6 +14,7 @@ namespace TronderBuss
         public MainViewModel()
         {
             this.Stops = new ObservableCollection<StopGroupViewModel>();
+            this.Favs = new ObservableCollection<StopGroupViewModel>();
             this.Location = new LocationViewModel();
         }
 
@@ -21,6 +22,7 @@ namespace TronderBuss
         /// A collection for ItemViewModel objects.
         /// </summary>
         public ObservableCollection<StopGroupViewModel> Stops { get; private set; }
+        public ObservableCollection<StopGroupViewModel> Favs { get; private set; }
         public LocationViewModel Location { get; private set; }
 
         private bool loading = false;
@@ -70,6 +72,12 @@ namespace TronderBuss
                     foreach (var stop in stops)
                         Stops.Add(stop);
                 });
+            });
+            bb.GetFavs(stops =>
+            {
+                Favs.Clear();
+                foreach (var stop in stops)
+                    Favs.Add(stop);
             });
         }
 

@@ -25,7 +25,7 @@
             </controls:Panorama.Background>
  
             <!--Panorama item one-->
-            <controls:PanoramaItem Header="holdeplasser">
+            <controls:PanoramaItem Header="Holdeplasser">
                 <!--Double line list with text wrapping-->
                 <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Stops}" SelectionChanged="ListBox_SelectionChanged">
                     <ListBox.ItemTemplate>
@@ -72,11 +72,24 @@
                 </Grid>
             </controls:PanoramaItem>
 
-            <controls:PanoramaItem Header="holdeplasser" DataContext="{Binding Location}">
+            <controls:PanoramaItem Header="I Nærheten" DataContext="{Binding Location}">
                 <!--Double line list with text wrapping-->
                 <StackPanel Margin="0,0,0,3" Width="432" Height="50">
                     <TextBlock Text="{Binding Latitude}" />
+                    <TextBlock Text="{Binding Longitude}" />
                 </StackPanel>
+            </controls:PanoramaItem>
+            
+            <controls:PanoramaItem Header="Favoritter">
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Favs}" SelectionChanged="ListBox_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,0,0,3" Width="432" Height="50" Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </controls:PanoramaItem>
         </controls:Panorama>
     </Grid>

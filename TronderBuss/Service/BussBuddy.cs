@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using RestSharp;
 using TronderBuss.ViewModels;
 using System.Linq;
+using System.Data.Linq.Mapping;
 
 namespace TronderBuss.Service
 {
@@ -61,6 +62,19 @@ namespace TronderBuss.Service
             });
         }
 
+        public void GetFavs(Action<IEnumerable<StopGroupViewModel>> callback)
+        {
+            var favs = context.Favs.OrderBy(f => f.Pos).ToList().Select(f => context.Stops.Where(s => s.Name == f.Name));
+            var stops = from f in favs
+                        from s in f
+                        select s;
+            callback(stops.GroupBy(stop => stop.Name).Select(group => new StopGroupViewModel
+            {
+                Ids = group.Select(stop => stop.BusStopId).ToList(),
+                Name = group.First().Name
+            }));
+        }
+
         public void GetDepartures(int busStopId, Action<DeparturesResponse> callback)
         {
             var request = new RestRequest("departures/{id}");
@@ -71,6 +85,16 @@ namespace TronderBuss.Service
             {
                 callback(result.Data);
             });
+        }
+
+        [Table]
+        public class Fav
+        {
+            [Column(CanBeNull = false, IsDbGenerated = false, IsPrimaryKey = true)]
+            public string Name { get; set; }
+
+            [Column]
+            public int Pos { get; set; }
         }
     }
 }
