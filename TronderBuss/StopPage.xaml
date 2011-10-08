@@ -9,6 +9,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:TronderBuss"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800" 
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -28,7 +29,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Width="100" Text="{Binding TimeView}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
                                 <TextBlock Width="50" Text="{Binding Line}" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeMedium}" />
-                                <TextBlock Text="{Binding Time}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
+                                <TextBlock Text="{Binding Destination}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -63,4 +64,25 @@
             <shell:ApplicationBarIconButton x:Name="FavButton" Click="FavButton_Click" IconUri="/Images/appbar.favs.addto.rest.png" Text="Legg til i favoritter"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition  Mode="SlideDownFadeIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideRightFadeIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideLeftFadeOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideUpFadeOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
 </phone:PhoneApplicationPage>
