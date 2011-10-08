@@ -10,8 +10,22 @@ namespace TronderBuss.Service
     {
         private RestClient client;
         public BussDbContext context;
+        private static BussBuddy singelton = null;
+        private static readonly object sLock = new object();
 
-        public BussBuddy()
+        public static BussBuddy Instance
+        {
+            get
+            {
+                if (singelton == null)
+                    lock (sLock)
+                        if (singelton == null)
+                            singelton = new BussBuddy();
+                return singelton;
+            }
+        }
+
+        private BussBuddy()
         {
             context = new BussDbContext("Data Source=isostore:/Data.sdf");
             if (!context.DatabaseExists())

@@ -61,7 +61,7 @@ namespace TronderBuss
                 return;
 
             loaded = true;
-            BussBuddy bb = new BussBuddy();
+            BussBuddy bb = BussBuddy.Instance;
             bb.GetBussStops(stops =>
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>

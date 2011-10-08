@@ -84,7 +84,7 @@ namespace TronderBuss.ViewModels
                 return;
             loaded = true;
 
-            var bb = new BussBuddy();
+            var bb = BussBuddy.Instance;
             foreach (var id in ids)
             {
                 bb.GetDepartures(id, departures =>
@@ -98,7 +98,9 @@ namespace TronderBuss.ViewModels
                     {
                         Deployment.Current.Dispatcher.BeginInvoke(() =>
                         {
-                            foreach (var departure in departures.Departures.OrderBy(d => d.TimeView))
+                            var old = towardsCity.ToList();
+                            towardsCity.Clear();
+                            foreach (var departure in departures.Departures.Concat(old).OrderBy(d => d.Time))
                             {
                                 towardsCity.Add(departure);
                             }
@@ -108,7 +110,9 @@ namespace TronderBuss.ViewModels
                     {
                         Deployment.Current.Dispatcher.BeginInvoke(() =>
                         {
-                            foreach (var departure in departures.Departures.OrderBy(d => d.TimeView))
+                            var old = towardsCity.ToList();
+                            fromCity.Clear();
+                            foreach (var departure in departures.Departures.Concat(old).OrderBy(d => d.Time))
                             {
                                 fromCity.Add(departure);
                             }
