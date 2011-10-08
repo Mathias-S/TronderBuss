@@ -93,6 +93,21 @@ namespace TronderBuss.Service
             }));
         }
 
+        public void AddAsFav(string name, int pos)
+        {
+            context.Favs.InsertOnSubmit(new Fav
+            {
+                Name = name,
+                Pos = pos
+            });
+            context.SubmitChanges();
+        }
+
+        public void RemoveAsFav(string name)
+        {
+            context.Favs.DeleteAllOnSubmit(context.Favs.Where(f => f.Name == name));
+        }
+
         public void GetDepartures(int busStopId, Action<DeparturesResponse> callback)
         {
             var request = new RestRequest("departures/{id}");
