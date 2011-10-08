@@ -71,6 +71,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AllStops.xaml.cs">
+      <DependentUpon>AllStops.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Service\DbContext.cs" />
     <Compile Include="StopPage.xaml.cs">
       <DependentUpon>StopPage.xaml</DependentUpon>
@@ -94,6 +97,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="AllStops.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="StopPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

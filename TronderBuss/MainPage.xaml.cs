@@ -100,5 +100,10 @@ namespace TronderBuss
                 Dispatcher.BeginInvoke(() => SearchListBox.ItemsSource = fin);
             }).Start();
         }
+
+        private void ListAllStops_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AllStops.xaml", UriKind.Relative));
+        }
     }
 }

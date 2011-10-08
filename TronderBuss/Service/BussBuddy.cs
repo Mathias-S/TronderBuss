@@ -117,7 +117,10 @@ namespace TronderBuss.Service
             context.Favs.DeleteAllOnSubmit(context.Favs.Where(f => f.Name == name));
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
-                App.ViewModel.Favs.Remove(App.ViewModel.Favs.Where(f => f.Name == name).First());
+                try
+                { App.ViewModel.Favs.Remove(App.ViewModel.Favs.Where(f => f.Name == name).First()); }
+                catch 
+                { }
             });
         }
 
