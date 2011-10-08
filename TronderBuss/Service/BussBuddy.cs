@@ -42,6 +42,12 @@ namespace TronderBuss.Service
             callback(dbStops.GroupBy(stop => stop.Name).Select(group => new StopGroupViewModel
             {
                 Ids = group.Select(stop => stop.BusStopId).ToList(),
+                Locations = group.Select(stop => new LocationViewModel
+                {
+                    Availible = true,
+                    Latitude = stop.Latitude,
+                    Longitude = stop.Longitude
+                }).ToList(),
                 Name = group.First().Name
             }));
 
@@ -57,6 +63,12 @@ namespace TronderBuss.Service
                     callback(result.Data.BusStops.OrderBy(stop => stop.Name).GroupBy(stop => stop.Name).Select(group => new StopGroupViewModel
                     {
                         Ids = group.Select(stop => stop.BusStopId).ToList(),
+                        Locations = group.Select(stop => new LocationViewModel
+                        {
+                            Availible = true,
+                            Latitude = stop.Latitude,
+                            Longitude = stop.Longitude
+                        }).ToList(),
                         Name = group.First().Name
                     }));
             });
@@ -71,6 +83,12 @@ namespace TronderBuss.Service
             callback(stops.GroupBy(stop => stop.Name).Select(group => new StopGroupViewModel
             {
                 Ids = group.Select(stop => stop.BusStopId).ToList(),
+                Locations = group.Select(stop => new LocationViewModel
+                {
+                    Availible = true,
+                    Latitude = stop.Latitude,
+                    Longitude = stop.Longitude
+                }).ToList(),
                 Name = group.First().Name
             }));
         }

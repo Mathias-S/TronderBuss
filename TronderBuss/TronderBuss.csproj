@@ -123,6 +123,7 @@
     <Resource Include="Toolkit.Content\ApplicationBar.Select.png" />
     <Resource Include="PanoramaBackground.png" />
     <Resource Include="Images\addstar.png" />
+    <Content Include="Images\appbar.favs.addto.rest.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
