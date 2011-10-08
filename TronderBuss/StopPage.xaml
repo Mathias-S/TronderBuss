@@ -60,7 +60,7 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton x:Name="ShowMap" Click="ShowMap_Click" IconUri="/Images/appbar_button1.png" Text="Vis i kart"/>
+            <shell:ApplicationBarIconButton x:Name="ShowMap" Click="ShowMap_Click" IconUri="/Images/appbar.mapicon.png" Text="Vis i kart"/>
             <shell:ApplicationBarIconButton x:Name="FavButton" Click="FavButton_Click" IconUri="/Images/appbar.favs.addto.rest.png" Text="Legg til i favoritter"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
