@@ -88,6 +88,15 @@ namespace TronderBuss.ViewModels
             get { return fromCity; }
         }
 
+        public double LatMid
+        {
+            get { return this.Locations[0].Latitude; }
+        }
+
+        public double LonMid
+        {
+            get { return this.Locations[0].Longitude; }
+        }
         public bool Loaded
         {
             get { return loaded; }

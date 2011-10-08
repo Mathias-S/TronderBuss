@@ -43,6 +43,7 @@ namespace TronderBuss
                     });
                     BussBuddy.Instance.BumpHistory(stop.Name);
                     NavigationService.Navigate(new Uri("/StopPage.xaml" + qs, UriKind.Relative));
+                    ((ListBox)sender).SelectedIndex = -1;
                 }
             }
         }
