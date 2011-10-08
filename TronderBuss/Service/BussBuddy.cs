@@ -37,6 +37,7 @@ namespace TronderBuss.Service
         public void GetBussStops(Action<IEnumerable<StopGroupViewModel>> callback)
         {
             var dbStops = context.Stops.OrderBy(stop => stop.Name).ToList();
+            int count = dbStops.Count;
             callback(dbStops.GroupBy(stop => stop.Name).Select(group => new StopGroupViewModel
             {
                 Ids = group.Select(stop => stop.BusStopId).ToList(),
@@ -51,11 +52,12 @@ namespace TronderBuss.Service
                 context.Stops.DeleteAllOnSubmit(context.Stops);
                 context.Stops.InsertAllOnSubmit(result.Data.BusStops);
                 context.SubmitChanges();
-                callback(result.Data.BusStops.OrderBy(stop => stop.Name).GroupBy(stop => stop.Name).Select(group => new StopGroupViewModel
-                {
-                    Ids = group.Select(stop => stop.BusStopId).ToList(),
-                    Name = group.First().Name
-                }));
+                if(count == 0)
+                    callback(result.Data.BusStops.OrderBy(stop => stop.Name).GroupBy(stop => stop.Name).Select(group => new StopGroupViewModel
+                    {
+                        Ids = group.Select(stop => stop.BusStopId).ToList(),
+                        Name = group.First().Name
+                    }));
             });
         }
 
