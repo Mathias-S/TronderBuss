@@ -5,6 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800" 
@@ -26,7 +27,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Width="100" Text="{Binding TimeView}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
                                 <TextBlock Width="50" Text="{Binding Line}" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeMedium}" />
-                                <TextBlock Text="{Binding Destination}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
+                                <TextBlock Text="{Binding Time}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -47,5 +48,11 @@
                 </ListBox>
             </controls:PivotItem>
         </controls:Pivot>
+        
+        <!--<controls:PivotItem Header="Kart">
+            <Grid>
+                <Image Source="http://dev.virtualearth.net/REST/v1/Imagery/Map/imagerySet/centerPoint/zoomLevel?mapSize=480,500&amp;centerPoint=47.610,-122.107&amp;imagerySet=Road" />
+            </Grid>
+        </controls:PivotItem>-->
     </Grid>
 </phone:PhoneApplicationPage>

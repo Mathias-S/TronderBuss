@@ -66,13 +66,27 @@ namespace TronderBuss.ViewModels
             {
                 if (isRealtimeData)
                 {
-                    DateTime time = ParseTime(registeredDepartureTime);
-                    return String.Format("{0:00} min", Math.Ceiling(time.Subtract(DateTime.Now).TotalMinutes));
+                    DateTime time = Time;
+                    var diff = time.Subtract(DateTime.Now);
+                    if(diff >= TimeSpan.FromMinutes(10))
+                        return Time.ToString("HH:mm*");
+                    return String.Format("{0:0} min", Math.Ceiling(diff.TotalMinutes));
                 }
                 else
                 {
-                    return ParseTime(scheduledDepartureTime).ToString("hh:mm");
+                    return Time.ToString("HH:mm");
                 }
+            }
+        }
+
+        public DateTime Time
+        {
+            get
+            {
+                if (isRealtimeData)
+                    return ParseTime(registeredDepartureTime);
+                else
+                    return ParseTime(scheduledDepartureTime);
             }
         }
 
@@ -80,7 +94,9 @@ namespace TronderBuss.ViewModels
         {
             var dt =  DateTime.Parse(timeString + "Z");
             dt = DateTime.SpecifyKind(dt, DateTimeKind.Local);
-            return dt.ToUniversalTime();
+            dt = dt.ToUniversalTime();
+            dt = dt.AddDays(Math.Ceiling(DateTime.Now.Subtract(dt).TotalDays));
+            return dt;
         }
 
         public bool IsRealtimeData

@@ -9,8 +9,22 @@ namespace TronderBuss.Service
     public class BussBuddy
     {
         private RestClient client;
+        private static BussBuddy singelton = null;
+        private static readonly object sLock = new object();
 
-        public BussBuddy()
+        public static BussBuddy Instance
+        {
+            get
+            {
+                if (singelton == null)
+                    lock (sLock)
+                        if (singelton == null)
+                            singelton = new BussBuddy();
+                return singelton;
+            }
+        }
+
+        private BussBuddy()
         {
             client = new RestClient("http://api.busbuddy.norrs.no:8080/api/1.2/");
             client.AddDefaultParameter("apiKey", "HwSJ6xL9wCUnpegC");
