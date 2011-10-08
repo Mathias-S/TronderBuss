@@ -20,6 +20,7 @@ namespace TronderBuss.ViewModels
     {
         private string name;
         private List<int> ids;
+        private List<LocationViewModel> locations;
         private bool loaded;
         private ObservableCollection<DepartureViewModel> towardsCity = new ObservableCollection<DepartureViewModel>();
         private ObservableCollection<DepartureViewModel> fromCity = new ObservableCollection<DepartureViewModel>();
@@ -47,6 +48,19 @@ namespace TronderBuss.ViewModels
                 {
                     ids = value;
                     NotifyPropertyChanged("Ids");
+                }
+            }
+        }
+
+        public List<LocationViewModel> Locations
+        {
+            get { return locations; }
+            set
+            {
+                if (locations != value)
+                {
+                    locations = value;
+                    NotifyPropertyChanged("Locations");
                 }
             }
         }

@@ -40,5 +40,10 @@ namespace TronderBuss
             if (!stop.Loaded)
                 stop.Load();
         }
+
+        private void ShowMap_Click(object sender, System.EventArgs e)
+        {
+            
+        }
     }
 }
