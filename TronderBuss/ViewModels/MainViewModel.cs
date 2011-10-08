@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows;
 using TronderBuss.Service;
 using TronderBuss.ViewModels;
+using System.Device.Location;
 
 
 namespace TronderBuss
@@ -13,12 +14,14 @@ namespace TronderBuss
         public MainViewModel()
         {
             this.Stops = new ObservableCollection<StopGroupViewModel>();
+            this.Location = new LocationViewModel();
         }
 
         /// <summary>
         /// A collection for ItemViewModel objects.
         /// </summary>
         public ObservableCollection<StopGroupViewModel> Stops { get; private set; }
+        public LocationViewModel Location { get; private set; }
 
         private bool loading = false;
         private bool loaded = false;
@@ -63,10 +66,34 @@ namespace TronderBuss
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
+                    Stops.Clear();
                     foreach (var stop in stops)
                         Stops.Add(stop);
                 });
             });
+        }
+
+        private GeoCoordinateWatcher watcher;
+        internal void Start()
+        {
+            if (watcher == null)
+                watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
+
+            
+
+            watcher.MovementThreshold = 20;
+            watcher.PositionChanged += (sender, arg) =>
+            {
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    Location.Availible = true;
+                    Location.Latitude = arg.Position.Location.Latitude;
+                    Location.Longitude = arg.Position.Location.Longitude;
+                });
+            };
+
+            try { watcher.Start(); }
+            catch { }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

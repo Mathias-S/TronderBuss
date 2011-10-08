@@ -9,20 +9,34 @@ namespace TronderBuss.Service
     public class BussBuddy
     {
         private RestClient client;
+        public BussDbContext context;
 
         public BussBuddy()
         {
+            context = new BussDbContext("Data Source=isostore:/Data.sdf");
+            if (!context.DatabaseExists())
+                context.CreateDatabase();
             client = new RestClient("http://api.busbuddy.norrs.no:8080/api/1.2/");
             client.AddDefaultParameter("apiKey", "HwSJ6xL9wCUnpegC");
         }
 
         public void GetBussStops(Action<IEnumerable<StopGroupViewModel>> callback)
         {
+            var dbStops = context.Stops.OrderBy(stop => stop.Name).ToList();
+            callback(dbStops.GroupBy(stop => stop.Name).Select(group => new StopGroupViewModel
+            {
+                Ids = group.Select(stop => stop.BusStopId).ToList(),
+                Name = group.First().Name
+            }));
+
             var request = new RestRequest("busstops");
             request.RequestFormat = DataFormat.Json;
 
             client.ExecuteAsync<StopResponse>(request, result =>
             {
+                context.Stops.DeleteAllOnSubmit(context.Stops);
+                context.Stops.InsertAllOnSubmit(result.Data.BusStops);
+                context.SubmitChanges();
                 callback(result.Data.BusStops.OrderBy(stop => stop.Name).GroupBy(stop => stop.Name).Select(group => new StopGroupViewModel
                 {
                     Ids = group.Select(stop => stop.BusStopId).ToList(),

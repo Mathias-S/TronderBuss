@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace TronderBuss.ViewModels
 {
-    public class StopGroupViewModel : INotifyPropertyChanged
+    public class StopGroupViewModel : ViewModelBase
     {
         private string name;
         private List<int> ids;
@@ -33,7 +33,7 @@ namespace TronderBuss.ViewModels
                 if (name != value)
                 {
                     name = value;
-                    OnPropertyChange("Name");
+                    NotifyPropertyChanged("Name");
                 }
             }
         }
@@ -46,7 +46,7 @@ namespace TronderBuss.ViewModels
                 if (ids != value)
                 {
                     ids = value;
-                    OnPropertyChange("Ids");
+                    NotifyPropertyChanged("Ids");
                 }
             }
         }
@@ -61,12 +61,6 @@ namespace TronderBuss.ViewModels
             get { return fromCity; }
         }
 
-        private void OnPropertyChange(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public bool Loaded
@@ -77,7 +71,7 @@ namespace TronderBuss.ViewModels
                 if (loaded != value)
                 {
                     loaded = value;
-                    OnPropertyChange("Loaded");
+                    NotifyPropertyChanged("Loaded");
                 }
             }
         }

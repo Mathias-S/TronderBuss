@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
+using System.Data.Linq.Mapping;
 
 namespace TronderBuss.ViewModels
 {
-    public class StopViewModel : INotifyPropertyChanged
+    [Table]
+    public class StopViewModel : ViewModelBase
     {
         private int id;
         private string name;
@@ -12,6 +14,7 @@ namespace TronderBuss.ViewModels
         private double longitude;
         private double latitude;
 
+        [Column(IsPrimaryKey = true, IsDbGenerated = false, DbType = "INT NOT NULL", CanBeNull = false)]
         public int BusStopId
         {
             get { return id; }
@@ -20,10 +23,11 @@ namespace TronderBuss.ViewModels
                 if (id != value)
                 {
                     id = value;
-                    OnPropertyChange("BusStopId");
+                    NotifyPropertyChanged("BusStopId");
                 }
             }
         }
+        [Column]
         public string Name
         {
             get { return name; }
@@ -32,10 +36,11 @@ namespace TronderBuss.ViewModels
                 if (name != value)
                 {
                     name = value;
-                    OnPropertyChange("Name");
+                    NotifyPropertyChanged("Name");
                 }
             }
         }
+        [Column]
         public string NameWithAbbreviations {
             get { return nameWithAbbrevations; }
             set
@@ -43,10 +48,11 @@ namespace TronderBuss.ViewModels
                 if (nameWithAbbrevations != value)
                 {
                     nameWithAbbrevations = value;
-                    OnPropertyChange("NameWithAbbreviations");
+                    NotifyPropertyChanged("NameWithAbbreviations");
                 }
             }
         }
+        [Column]
         public string BusStopMaintainer
         {
             get { return busStopMaintainer; }
@@ -55,10 +61,11 @@ namespace TronderBuss.ViewModels
                 if (busStopMaintainer != value)
                 {
                     busStopMaintainer = value;
-                    OnPropertyChange("BusStopMaintainer");
+                    NotifyPropertyChanged("BusStopMaintainer");
                 }
             }
         }
+        [Column]
         public int LocationId
         {
             get { return locationId; }
@@ -67,10 +74,11 @@ namespace TronderBuss.ViewModels
                 if (locationId != value)
                 {
                     locationId = value;
-                    OnPropertyChange("LocationId");
+                    NotifyPropertyChanged("LocationId");
                 }
             }
         }
+        [Column]
         public double Longitude
         {
             get { return longitude; }
@@ -79,10 +87,11 @@ namespace TronderBuss.ViewModels
                 if (longitude != value)
                 {
                     longitude = value;
-                    OnPropertyChange("Longitude");
+                    NotifyPropertyChanged("Longitude");
                 }
             }
         }
+        [Column]
         public double Latitude
         {
             get { return latitude; }
@@ -91,17 +100,9 @@ namespace TronderBuss.ViewModels
                 if (latitude != value)
                 {
                     latitude = value;
-                    OnPropertyChange("Latitude");
+                    NotifyPropertyChanged("Latitude");
                 }
             }
         }
-
-        private void OnPropertyChange(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

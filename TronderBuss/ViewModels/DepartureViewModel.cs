@@ -3,7 +3,7 @@ using System;
 
 namespace TronderBuss.ViewModels
 {
-    public class DepartureViewModel : INotifyPropertyChanged
+    public class DepartureViewModel : ViewModelBase
     {
         private string line;
         private string destination;
@@ -19,7 +19,7 @@ namespace TronderBuss.ViewModels
                 if (line != value)
                 {
                     line = value;
-                    OnPropertyChange("Line");
+                    NotifyPropertyChanged("Line");
                 }
             }
         }
@@ -31,7 +31,7 @@ namespace TronderBuss.ViewModels
                 if (destination != value)
                 {
                     destination = value;
-                    OnPropertyChange("Destination");
+                    NotifyPropertyChanged("Destination");
                 }
             }
         }
@@ -43,7 +43,7 @@ namespace TronderBuss.ViewModels
                 if (registeredDepartureTime != value)
                 {
                     registeredDepartureTime = value;
-                    OnPropertyChange("RegisteredDepartureTime");
+                    NotifyPropertyChanged("RegisteredDepartureTime");
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace TronderBuss.ViewModels
                 if (scheduledDepartureTime != value)
                 {
                     scheduledDepartureTime = value;
-                    OnPropertyChange("ScheduledDepartureTime");
+                    NotifyPropertyChanged("ScheduledDepartureTime");
                 }
             }
         }
@@ -91,17 +91,9 @@ namespace TronderBuss.ViewModels
                 if (isRealtimeData != value)
                 {
                     isRealtimeData = value;
-                    OnPropertyChange("IsRealtimeData");
+                    NotifyPropertyChanged("IsRealtimeData");
                 }
             }
         }
-
-        private void OnPropertyChange(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

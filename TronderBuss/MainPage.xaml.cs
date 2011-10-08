@@ -6,7 +6,7 @@ using TronderBuss.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-
+using System.Device.Location;
 namespace TronderBuss
 {
     public partial class MainPage : PhoneApplicationPage
@@ -26,6 +26,7 @@ namespace TronderBuss
         {
             if (!App.ViewModel.Loaded)
                 App.ViewModel.Load();
+            App.ViewModel.Start();
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
